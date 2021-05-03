@@ -1,0 +1,34 @@
+
+## Execute docker-compose -f YouTrack.yml -p YouTrack up -d --force-recreate --build
+## to start all containers in daemon mode
+## Where:
+##      '-f docker-compose.yml' -- specifies this compose file
+##      '-p reportportal' -- specifies container's prefix (project name)
+##      '-d' -- enables daemon mode
+##      '--force-recreate' -- forces re-recreating of all containers
+
+version: '2.4'
+services:
+
+  GitLab:
+    image: gitlab/gitlab-ce:latest
+    restart: always
+    hostname: 'gitlab.AutoInfra.com'
+    ports:
+      - "8060:80"
+      - "443:443"
+      - "22:22"
+
+    volumes:
+      - GitLabConfig:/etc/gitlab
+      - GitLabLogss:/var/log/gitlab
+      - GitLabDatavol:/var/opt/gitlab
+
+    restart: always
+    hostname: "gitlab.AutoInfra.com"
+         
+  # Docker volume for Windows host
+volumes:
+  GitLabConfig:
+  GitLabLogss:
+  GitLabDatavol:

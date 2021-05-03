@@ -1,0 +1,37 @@
+# Usage:
+#   docker-compose -p sonarqube up -d --force-recreate --build
+version: "3"
+ 
+services:
+  sonarqube:
+    image: sonarqube:7.9.2-community
+    container_name: sonarqube
+    restart: always
+    environment:
+      - SONARQUBE_JDBC_USERNAME=sonar
+      - SONARQUBE_JDBC_PASSWORD=password1
+      - SONARQUBE_JDBC_URL=jdbc:postgresql://db:5432/sonarqube
+    ports:
+      - "7000:9000"
+      - "9092:9092"
+    volumes:
+      - C:/AutoInfra_DockerVolumes/sonar:/opt/sonarqube/conf
+      - C:/AutoInfra_DockerVolumes/sonar:/opt/sonarqube/data
+      - C:/AutoInfra_DockerVolumes/sonar:/opt/sonarqube/extensions
+      - C:/AutoInfra_DockerVolumes/sonar:/opt/sonarqube/lib/bundled-plugins
+ 
+  db:
+    image: postgres:12
+    container_name: postgres_sonar_db
+    restart: always
+    environment:
+      - POSTGRES_USER=sonar
+      - POSTGRES_PASSWORD=password1
+      - POSTGRES_DB=sonarqube
+    volumes:
+      - sonarqube_db:/var/lib/postgresql
+      - postgresql_data:/var/lib/postgresql/data
+ 
+volumes:
+  postgresql_data:
+  sonarqube_db:

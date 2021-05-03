@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="RP Tests">
+
+    <listeners>
+<!--     	<listener class-name="listeners.Elastic.ElasticListener"/>-->
+	    <listener class-name="com.epam.reportportal.testng.ReportPortalTestNGListener"/>
+    </listeners>
+ <test name="Amazon">
+    <classes>
+      <class name="org.AutoInfra.ReportPortal_Logging"/>
+    </classes>
+  </test>
+
+
+</suite> <!-- Ecommerce_Test -->

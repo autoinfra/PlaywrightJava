@@ -1,0 +1,19 @@
+# Usage:
+#   docker-compose -p jenkins up -d --force-recreate --build
+version: '2'
+services:
+  jenkins:
+    image: "jenkins/jenkins:latest"
+    container_name: jenkins
+    user: jenkins
+    volumes:
+      - 'C:/AutoInfra_DockerVolumes/jenkins/:/var/jenkins_home'
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      JENKINS_HOST_HOME: "/data/jenkins"
+#      - JAVA_OPTS=-Dhttp.proxyHost=HOST -Dhttp.proxyPort=8080 -Dhttps.proxyHost=HOST -Dhttps.proxyPort=8080
+    ports:
+    #UPSTREAMPORT:ORIGINALPORT is SYNTAX
+      - "9099:8080"    
+
+    restart: always

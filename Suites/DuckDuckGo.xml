@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="DuckDuckGO Search" >
+
+    <listeners>
+<!--      	<listener class-name="listeners.Grafana.grafanalistener"/>-->
+<!--     <listener class-name="listeners.Elastic.ElasticListener"/>-->
+<!-- 	    <listener class-name="com.epam.reportportal.testng.ReportPortalTestNGListener"/>-->
+        <listener class-name="listeners.ExtentBasic.ExtentListener"></listener>
+<!--          <listener class-name="listeners.PowerBI.PowerBI_Listener"/>-->
+    </listeners>
+
+    <test name="Search-For-WebDriver">
+        <parameter name="keywordToSearch" value="WebDriver" />
+        <classes>
+            <class name="org.AutoInfra.SearchTest" />
+        </classes>
+    </test>
+
+    <test name="Search-For-Selenium">
+        <parameter name="keywordToSearch" value="Selenium" />
+        <classes>
+            <class name="org.AutoInfra.SearchTest" />
+        </classes>
+    </test>
+
+    <test name="Search-For-UFT">
+        <parameter name="keywordToSearch" value="UFT" />
+        <classes>
+            <class name="org.AutoInfra.SearchTest" />
+        </classes>
+    </test>
+
+    <test name="Search-For-QA">
+        <parameter name="keywordToSearch" value="QA" />
+        <classes>
+            <class name="org.AutoInfra.SearchTest" />
+        </classes>
+    </test>
+
+    <test name="Search-For-Docker">
+        <parameter name="keywordToSearch" value="Docker" />
+        <classes>
+            <class name="org.AutoInfra.SearchTest" />
+        </classes>
+    </test>
+
+    <test name="Search-For-Kubernetes">
+        <parameter name="keywordToSearch" value="Kubernetes" />
+        <classes>
+            <class name="org.AutoInfra.SearchTest" />
+        </classes>
+    </test>
+
+</suite> <!-- Ecommerce_Test -->
+

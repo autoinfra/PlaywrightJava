@@ -1,0 +1,27 @@
+
+## Execute docker-compose -f portainer.yml -p portainer up -d --force-recreate --build
+## to start all containers in daemon mode
+## Where:
+##      '-f docker-compose.yml' -- specifies this compose file
+##      '-p reportportal' -- specifies container's prefix (project name)
+##      '-d' -- enables daemon mode
+##      '--force-recreate' -- forces re-recreating of all containers
+
+version: '2.4'
+services:
+
+  portainer:
+    image: portainer/portainer:1.23.1
+    ports:
+      - "8070:9000" # HTTP Administration exposed
+#      - "8000:8000" # HTTP exposed
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./volumes/data:/data
+
+
+    restart: always
+         
+  # Docker volume for Windows host
+#volumes:
+#  portainer_data:
