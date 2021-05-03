@@ -4,8 +4,6 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.WaitForSelectorState;
 import lombok.SneakyThrows;
 
-import java.nio.file.Paths;
-
 public class SearchPage {
 
     private Page page;
@@ -22,7 +20,6 @@ public class SearchPage {
         page.waitForSelector("input#search_form_input_homepage",new Page.WaitForSelectorOptions().setState(WaitForSelectorState.VISIBLE));
         page.fill("input#search_form_input_homepage",Keyword);
         page.click("#search_button_homepage");
-        page.screenshot(new Page.ScreenshotOptions().setPath(Paths.get("example.png")));
 
     }
     @SneakyThrows
@@ -31,7 +28,6 @@ public class SearchPage {
         page.waitForSelector("text=Videos",new Page.WaitForSelectorOptions().setState(WaitForSelectorState.VISIBLE));
         page.click("text=Videos");
         Thread.sleep(5000);
-        page.screenshot(new Page.ScreenshotOptions().setPath(Paths.get("example2.png")));
     }
 
     public int printResult()

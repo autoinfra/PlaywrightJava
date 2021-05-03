@@ -7,25 +7,27 @@ import com.microsoft.playwright.Playwright;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeTest;
 
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import static listeners.ExtentBasic.ExtentReporterCls.ReportFolderName;
 
 public class base {
     protected Page page;
     protected Browser browser;
     private static final Logger LOGGER = LogManager.getLogger(base.class);
 
-    @BeforeClass
-    public void SetupDriver()
+   // @BeforeClass
+    public Page SetupDriver()
     {
         browser = Playwright
                             .create()
                             .chromium()
                             .launch(new BrowserType.LaunchOptions().setHeadless(true));
         Page page = browser.newPage();
-        this.page=page;
+        return page;
     }
 
     @AfterClass
@@ -33,10 +35,15 @@ public class base {
         browser.close();
     }
 
-    public void getScreenshot()
+    public String getScreenshot(Page page, String Testname)
     {
-        page.screenshot(new Page.ScreenshotOptions().setPath(Paths.get("example.png")));
-        LOGGER.info(page.title());
-        LOGGER.info("RP_MESSAGE#FILE#{}#{}", "example.png", "Example Screenshot");
+
+        Date d = new Date();
+        SimpleDateFormat SDF = new SimpleDateFormat("HH_mm_ss");
+        String random = SDF.format(d);
+        String Image=System.getProperty("user.dir")+"/HtmlReports/Extent/"+ReportFolderName+"/"+Testname+random+".png";
+        page.screenshot(new Page.ScreenshotOptions()
+                                .setPath(Paths.get(Image)));
+        return Image;
     }
 }

@@ -7,6 +7,7 @@ import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.markuputils.CodeLanguage;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.microsoft.playwright.Page;
+import lombok.SneakyThrows;
 import org.AutoInfra.base;
 import org.testng.ISuiteListener;
 import org.testng.ITestContext;
@@ -15,11 +16,9 @@ import org.testng.ITestResult;
 
 public class ExtentListener extends base implements ITestListener, ISuiteListener {
 
-    //base baseClass = new base();
     ITestContext ITC;
     ExtentReports extent = ExtentReporterCls.ReportGenerator("AutoInfraHTMLReport");
     ExtentTest test;
-    //ExtentTest test= extent.createTest("SingleRater");
     ExtentTest node;
     ITestResult result;
 
@@ -41,22 +40,33 @@ public class ExtentListener extends base implements ITestListener, ISuiteListene
     public void onTestStart(ITestResult result) {
         node = test.createNode(result.getMethod().getMethodName());
         LocalThread.set(node);
-        //getScreenshot(page);
     }
 
+    @SneakyThrows
     @Override
     public void onTestSuccess(ITestResult result) {
-       // baseClass.getScreenshot();
-        //Page page =null;
 
         LocalThread.get().log(Status.PASS,"------------TEST CASE PASSED------------");
+
+        Page page = null;
+        Object TestObject = result.getInstance();
+        Class CurrentClass = result.getTestClass().getRealClass();
+        page = (Page) CurrentClass.getDeclaredField("page").get(TestObject);
+        LocalThread.get().addScreenCaptureFromPath(getScreenshot(page,result.getMethod().getMethodName()));
+
     }
 
+    @SneakyThrows
     @Override
     public void onTestFailure(ITestResult result) {
-        //baseClass.getScreenshot();
 
         LocalThread.get().fail(result.getThrowable());
+
+        Page page = null;
+        Object TestObject = result.getInstance();
+        Class CurrentClass = result.getTestClass().getRealClass();
+        page = (Page) CurrentClass.getDeclaredField("page").get(TestObject);
+        LocalThread.get().addScreenCaptureFromPath(getScreenshot(page,result.getMethod().getMethodName()));
 
     }
 

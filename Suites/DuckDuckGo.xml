@@ -16,6 +16,7 @@
             <class name="org.AutoInfra.SearchTest" />
         </classes>
     </test>
+<!--
 
     <test name="Search-For-Selenium">
         <parameter name="keywordToSearch" value="Selenium" />
@@ -51,6 +52,7 @@
             <class name="org.AutoInfra.SearchTest" />
         </classes>
     </test>
+-->
 
 </suite> <!-- Ecommerce_Test -->
 

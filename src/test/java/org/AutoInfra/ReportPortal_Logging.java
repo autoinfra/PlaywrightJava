@@ -25,57 +25,6 @@ public class ReportPortal_Logging {
     public static final String JSON_FILE_PATH = "files/file.json";
     public static final String XML_FILE_PATH = "Suites/DuckDuckGo.xml";
 
-/*    @Test
-    public void getStatus() {
-        String githubIssueStatus = "READY_TO_TEST";
-        Response response = given()
-                .header("Accept","application/json")
-                .auth().preemptive().basic("bhargav.udemy@gmail.com","eMTQ5AYdDUTJAOlYW5lG8158")
-                .baseUri("https://bhargavm65.atlassian.net/rest/api/3/issue/")
-                .when()
-                .get("/AUTOINFRA-6")
-                .then()
-                .statusCode(200).extract().response();
-
-System.out.println(response.jsonPath().getString("fields.status.name"));
-
-                given().log().all()
-                .header("X-Atlassian-Token","no-check")
-                .auth().preemptive().basic("bhargav.udemy@gmail.com","eMTQ5AYdDUTJAOlYW5lG8158")
-                .queryParam("fields","status")
-                .baseUri("https://bhargavm65.atlassian.net/rest/api/3/issue/")
-                .multiPart(new File("example2.png"))
-                .when()
-                .post("/AUTOINFRA-6/attachments")
-                .then()
-                        .log().all()
-                .statusCode(200).extract().response();
-
-    }*/
-
-    @Test
-    public  void testMethod(){
-
-        Playwright playwright = Playwright.create();
-            Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
-            Page page = browser.newPage();
-            page.navigate("http://playwright.dev");
-        LOGGER.info(page.title());
-        page.screenshot(new Page.ScreenshotOptions().setPath(Paths.get("example.png")));
-        LOGGER.info("RP_MESSAGE#FILE#{}#{}", "example.png", "Example Screenshot");
-
-        // Create a new incognito browser context
-        BrowserContext context = browser.newContext();
-// Create a new page inside context.
-        Page contextpage = context.newPage();
-        contextpage.navigate("https://playwright.dev/java/docs/core-concepts");
-        contextpage.screenshot(new Page.ScreenshotOptions().setPath(Paths.get("example2.png")));
-        LOGGER.info("RP_MESSAGE#FILE#{}#{}", "example2.png", "Example2 Screenshot");
-// Dispose context once it"s no longer needed.
-        context.close();
-        browser.close();
-    }
-
     @SneakyThrows
     @Test
     public void logXmlFile() {

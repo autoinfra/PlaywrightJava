@@ -9,13 +9,14 @@ import java.util.Date;
 
 public class ExtentReporterCls  {
     static ExtentReports extent;
+    public static String ReportFolderName;
 
     public static ExtentReports ReportGenerator(String Testname)
     {
         Date d = new Date();
-        SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MMM-dd_HH_mm");
-        String ReportFolderName = SDF.format(d);
-        String path = System.getProperty("user.dir")+"\\HtmlReports\\Extent\\"+ReportFolderName+"\\"+Testname+"ExecutionReport.html";
+        SimpleDateFormat SDF = new SimpleDateFormat("MMMM-dd-yyyy");
+        ReportFolderName = SDF.format(d);
+        String path = "HtmlReports/Extent/"+ReportFolderName+"/"+Testname+"Report.html";
         ExtentSparkReporter ESR = new ExtentSparkReporter(path);
         ESR.config().setReportName("Test Automation Results");
         ESR.config().setDocumentTitle(SDF+"Test Results");
