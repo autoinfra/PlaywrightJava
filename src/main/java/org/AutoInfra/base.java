@@ -1,9 +1,6 @@
 package org.AutoInfra;
 
-import com.microsoft.playwright.Browser;
-import com.microsoft.playwright.BrowserType;
-import com.microsoft.playwright.Page;
-import com.microsoft.playwright.Playwright;
+import com.microsoft.playwright.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.annotations.AfterClass;
@@ -15,7 +12,7 @@ import java.util.Date;
 import static listeners.ExtentBasic.ExtentReporterCls.ReportFolderName;
 
 public class base {
-    protected Page page;
+    //protected Page page;
     protected Browser browser;
     private static final Logger LOGGER = LogManager.getLogger(base.class);
 
@@ -26,14 +23,13 @@ public class base {
                             .create()
                             .chromium()
                             .launch(new BrowserType.LaunchOptions().setHeadless(true));
-        Page page = browser.newPage();
+        BrowserContext context = browser.newContext();
+        Page page = context.newPage();
         return page;
     }
 
     @AfterClass
-    public void tearDown(){
-        browser.close();
-    }
+    public void tearDown(){browser.close(); }
 
     public String getScreenshot(Page page, String Testname)
     {
