@@ -1,21 +1,20 @@
 package listeners.PowerBI;
 
-import com.google.inject.Injector;
-import com.google.inject.Module;
-import org.testng.*;
-import org.testng.xml.XmlTest;
+import org.testng.ITestContext;
+import org.testng.ITestListener;
+import org.testng.ITestResult;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PowerBI_Listener implements ITestListener {
 
     private  PowerBI_ResultSender PowerBI_ResultSender;
-    private String TSTNAME;
     private ITestContext ITC;
+
     @Override
     public void onTestStart(ITestResult result) {
         this.PowerBI_ResultSender = new PowerBI_ResultSender();
-
     }
 
     @Override
@@ -43,6 +42,7 @@ public class PowerBI_Listener implements ITestListener {
     @Override
     public void onStart(ITestContext context) {
         //SKIP
+        this.ITC=context;
     }
 
     @Override
@@ -52,22 +52,15 @@ public class PowerBI_Listener implements ITestListener {
 
     public void sendStatus(ITestResult ITR, String status){
 
-        //String Suitename = ITR.getTestName();
-        String Suitename = ITR.getTestName();
-        String Classname = ITR.getTestClass().getName();
-        String Methodname = ITR.getMethod().getMethodName();
-        String MethodDescription = ITR.getMethod().getDescription();
-        String Host = ITR.getHost();
-        String Result = status;
         long Duration = ITR.getEndMillis() - ITR.getStartMillis();
 
         PowerBI_Pojo p = PowerBI_Pojo.builder()
-                .Suitename(Suitename)
-                .Classname(Classname)
-                .Methodname(Methodname)
-                .MethodDescription(MethodDescription)
-                .Host(Host)
-                .Result(Result)
+                .Suitename(ITC.getCurrentXmlTest().getSuite().getName())
+                .Classname(ITR.getTestClass().getName())
+                .Methodname(ITR.getMethod().getMethodName())
+                .MethodDescription(ITR.getMethod().getDescription())
+                .Host(System.getProperty("user.name"))
+                .Result(status)
                 .Duration(Duration)
                 .build();
 
@@ -77,6 +70,5 @@ public class PowerBI_Listener implements ITestListener {
         PB.setRows(List);
         PowerBI_ResultSender.PushData(PB);
     }
-
 
 }
