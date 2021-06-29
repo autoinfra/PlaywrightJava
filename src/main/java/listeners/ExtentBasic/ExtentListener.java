@@ -8,7 +8,7 @@ import com.aventstack.extentreports.markuputils.CodeLanguage;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.microsoft.playwright.Page;
 import lombok.SneakyThrows;
-import org.AutoInfra.base;
+import Base.base;
 import org.testng.ISuiteListener;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
@@ -16,11 +16,10 @@ import org.testng.ITestResult;
 
 public class ExtentListener extends base implements ITestListener, ISuiteListener {
 
-    ITestContext ITC;
     ExtentReports extent = ExtentReporterCls.ReportGenerator("AutoInfraHTMLReport");
     ExtentTest test;
     ExtentTest node;
-    ITestResult result;
+    ITestContext ITC;
 
     //creating thread for 'test' object for parallel execution
    private static final ThreadLocal<ExtentTest> LocalThread = new ThreadLocal<ExtentTest>();
@@ -52,7 +51,7 @@ public class ExtentListener extends base implements ITestListener, ISuiteListene
         Object TestObject = result.getInstance();
         Class CurrentClass = result.getTestClass().getRealClass();
         page = (Page) CurrentClass.getDeclaredField("page").get(TestObject);
-        LocalThread.get().addScreenCaptureFromPath(getScreenshot(page,result.getMethod().getMethodName()));
+        LocalThread.get().addScreenCaptureFromPath(getScreenshot(ITC.getName(),page));
 
     }
 
@@ -66,7 +65,7 @@ public class ExtentListener extends base implements ITestListener, ISuiteListene
         Object TestObject = result.getInstance();
         Class CurrentClass = result.getTestClass().getRealClass();
         page = (Page) CurrentClass.getDeclaredField("page").get(TestObject);
-        LocalThread.get().addScreenCaptureFromPath(getScreenshot(page,result.getMethod().getMethodName()));
+        LocalThread.get().addScreenCaptureFromPath(getScreenshot(ITC.getName(),page));
 
     }
 
@@ -89,6 +88,7 @@ public class ExtentListener extends base implements ITestListener, ISuiteListene
     @Override
     public void onStart(ITestContext context) {
         test= extent.createTest(context.getName());
+        this.ITC = context;
     }
 
     @Override

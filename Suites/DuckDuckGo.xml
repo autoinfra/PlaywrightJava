@@ -16,7 +16,7 @@
             <class name="org.AutoInfra.SearchTest" />
         </classes>
     </test>
-<!--
+
 
     <test name="Search-For-Selenium">
         <parameter name="keywordToSearch" value="Selenium" />
@@ -24,35 +24,35 @@
             <class name="org.AutoInfra.SearchTest" />
         </classes>
     </test>
+    <!--
+        <test name="Search-For-UFT">
+            <parameter name="keywordToSearch" value="UFT" />
+            <classes>
+                <class name="org.AutoInfra.SearchTest" />
+            </classes>
+        </test>
 
-    <test name="Search-For-UFT">
-        <parameter name="keywordToSearch" value="UFT" />
-        <classes>
-            <class name="org.AutoInfra.SearchTest" />
-        </classes>
-    </test>
+        <test name="Search-For-QA">
+            <parameter name="keywordToSearch" value="QA" />
+            <classes>
+                <class name="org.AutoInfra.SearchTest" />
+            </classes>
+        </test>
 
-    <test name="Search-For-QA">
-        <parameter name="keywordToSearch" value="QA" />
-        <classes>
-            <class name="org.AutoInfra.SearchTest" />
-        </classes>
-    </test>
+        <test name="Search-For-Docker">
+            <parameter name="keywordToSearch" value="Docker" />
+            <classes>
+                <class name="org.AutoInfra.SearchTest" />
+            </classes>
+        </test>
 
-    <test name="Search-For-Docker">
-        <parameter name="keywordToSearch" value="Docker" />
-        <classes>
-            <class name="org.AutoInfra.SearchTest" />
-        </classes>
-    </test>
-
-    <test name="Search-For-Kubernetes">
-        <parameter name="keywordToSearch" value="Kubernetes" />
-        <classes>
-            <class name="org.AutoInfra.SearchTest" />
-        </classes>
-    </test>
--->
+        <test name="Search-For-Kubernetes">
+            <parameter name="keywordToSearch" value="Kubernetes" />
+            <classes>
+                <class name="org.AutoInfra.SearchTest" />
+            </classes>
+        </test>
+    -->
 
 </suite> <!-- Ecommerce_Test -->
 

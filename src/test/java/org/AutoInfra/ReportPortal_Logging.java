@@ -1,10 +1,6 @@
 package org.AutoInfra;
 
 import com.epam.reportportal.message.ReportPortalMessage;
-import com.microsoft.playwright.*;
-import io.restassured.RestAssured;
-import io.restassured.path.json.JsonPath;
-import io.restassured.response.Response;
 import lombok.SneakyThrows;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,9 +11,6 @@ import rp.com.google.common.io.Files;
 import rp.com.google.common.io.Resources;
 
 import java.io.File;
-import java.nio.file.Paths;
-
-import static io.restassured.RestAssured.given;
 
 public class ReportPortal_Logging {
 

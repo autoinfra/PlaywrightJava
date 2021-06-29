@@ -2,7 +2,6 @@ package listeners.ExtentBasic;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
-import org.AutoInfra.base;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -14,7 +13,7 @@ public class ExtentReporterCls  {
     public static ExtentReports ReportGenerator(String Testname)
     {
         Date d = new Date();
-        SimpleDateFormat SDF = new SimpleDateFormat("MMMM-dd-yyyy");
+        SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MMM-dd_HH_mm");
         ReportFolderName = SDF.format(d);
         String path = "HtmlReports/Extent/"+ReportFolderName+"/"+Testname+"Report.html";
         ExtentSparkReporter ESR = new ExtentSparkReporter(path);
@@ -23,6 +22,7 @@ public class ExtentReporterCls  {
         extent = new ExtentReports();
         extent.attachReporter(ESR);
         extent.setSystemInfo("Tester",System.getProperty("user.name"));
+        extent.setSystemInfo("OS",System.getProperty("os.name"));
         return extent;
 
     }
