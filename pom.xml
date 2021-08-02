@@ -34,6 +34,13 @@
       <artifactId>playwright</artifactId>
       <version>1.10.0</version>
     </dependency>
+    <!--aeonbits.owner Dependency for Property file reader-->
+    <dependency>
+      <groupId>org.aeonbits.owner</groupId>
+      <artifactId>owner</artifactId>
+      <version>1.0.8</version>
+      <!--            <url>http://owner.aeonbits.org/</url>-->
+    </dependency>
 
     <dependency>
       <groupId>org.testng</groupId>

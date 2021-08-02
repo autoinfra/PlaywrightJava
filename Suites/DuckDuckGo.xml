@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="DuckDuckGO Search" >
+    <parameter name="environment" value="prod"></parameter>
 
     <listeners>
-<!--      	<listener class-name="listeners.Grafana.grafanalistener"/>-->
-<!--     <listener class-name="listeners.Elastic.ElasticListener"/>-->
-<!-- 	    <listener class-name="com.epam.reportportal.testng.ReportPortalTestNGListener"/>-->
-        <listener class-name="listeners.ExtentBasic.ExtentListener"></listener>
-<!--          <listener class-name="listeners.PowerBI.PowerBI_Listener"/>-->
+
+        <!--     <listener class-name="listeners.Grafana.grafanalistener"/>-->
+        <!--     <listener class-name="listeners.Elastic.ElasticListener"/>-->
+        <!-- 	 <listener class-name="com.epam.reportportal.testng.ReportPortalTestNGListener"/>-->
+        <!--     <listener class-name="listeners.ExtentBasic.ExtentListener"></listener>-->
+        <!--     <listener class-name="listeners.PowerBI.PowerBI_Listener"/>-->
+        <!--        <listener class-name="utilities.customAnnotations.Jira.IssueStatusListener"></listener>-->
+        <listener class-name="utilities.customAnnotations.notOnProd.notOnEnvListener"></listener>
+
     </listeners>
 
     <test name="Search-For-WebDriver">
@@ -18,12 +23,13 @@
     </test>
 
 
-    <test name="Search-For-Selenium">
+<!--    <test name="Search-For-Selenium">
         <parameter name="keywordToSearch" value="Selenium" />
         <classes>
             <class name="org.AutoInfra.SearchTest" />
         </classes>
     </test>
+    -->
     <!--
         <test name="Search-For-UFT">
             <parameter name="keywordToSearch" value="UFT" />
