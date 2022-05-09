@@ -12,7 +12,7 @@ public class AzDevOpsApiCall {
     public static final String Token = "PWD";
 
     @SneakyThrows
-    public static String getWorkItemStatus(String IssueID) {
+    public static String getWorkItemStatus(int IssueID) {
 
             Response response = given()
                     .header("Accept", "application/json")

@@ -4,14 +4,7 @@
     <parameter name="environment" value="prod"></parameter>
 
     <listeners>
-
-        <!--     <listener class-name="listeners.Grafana.grafanalistener"/>-->
-        <!--     <listener class-name="listeners.Elastic.ElasticListener"/>-->
-        <!-- 	 <listener class-name="com.epam.reportportal.testng.ReportPortalTestNGListener"/>-->
-        <!--     <listener class-name="listeners.ExtentBasic.ExtentListener"></listener>-->
-        <!--     <listener class-name="listeners.PowerBI.PowerBI_Listener"/>-->
-        <!--        <listener class-name="utilities.customAnnotations.Jira.IssueStatusListener"></listener>-->
-        <listener class-name="utilities.customAnnotations.notOnProd.notOnEnvListener"></listener>
+        <listener class-name="listeners.Allure.Allurelistener"></listener>
 
     </listeners>
 

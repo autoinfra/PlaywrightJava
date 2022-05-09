@@ -4,6 +4,8 @@ import com.microsoft.playwright.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
 
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
@@ -12,28 +14,21 @@ import java.util.Date;
 import static listeners.ExtentBasic.ExtentReporterCls.ReportFolderName;
 
 public class base {
-    //protected Page page;
+    protected Page page;
     protected Browser browser;
     private static final Logger LOGGER = LogManager.getLogger(base.class);
 
-   // @BeforeClass
-    public Page SetupDriver()
+    @BeforeSuite(alwaysRun = true)
+    public void InitializeDriver()
     {
-        browser = Playwright
-                            .create()
-                            .chromium()
-                            .launch(new BrowserType.LaunchOptions().setHeadless(true));
-        BrowserContext context = browser.newContext();
-        Page page = context.newPage();
-        return page;
+       page = DriverFactory.getDriver("CHROME");
     }
 
-    @AfterClass
-    public void tearDown(){browser.close(); }
+    @AfterSuite
+    public void tearDown(){page.close(); }
 
     public String getScreenshot(String TestCaseName,Page page)
     {
-
         Date d = new Date();
         SimpleDateFormat SDF = new SimpleDateFormat("HH_mm_ss");
         String random = SDF.format(d);

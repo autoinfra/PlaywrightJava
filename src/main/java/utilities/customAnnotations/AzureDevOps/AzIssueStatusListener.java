@@ -17,13 +17,13 @@ public class AzIssueStatusListener  implements IInvokedMethodListener {
     @Override
     public void afterInvocation(IInvokedMethod method, ITestResult testResult) {
 
-        AzureDevOpsIssue issueid = method.getTestMethod()
+        AzureDevOps issueid = method.getTestMethod()
                 .getConstructorOrMethod()
                 .getMethod()
-                .getAnnotation(AzureDevOpsIssue.class);
+                .getAnnotation(AzureDevOps.class);
 
         if (null != issueid) {
-            if(str_READY_TO_TEST.equalsIgnoreCase(AzDevOpsApiCall.getWorkItemStatus(issueid.AzIssueID()))){
+            if(str_READY_TO_TEST.equalsIgnoreCase(AzDevOpsApiCall.getWorkItemStatus(issueid.BugID()))){
                 switch(testResult.getStatus()){
                     case ITestResult.FAILURE:
                         // no need to fail as we might have expected this already.

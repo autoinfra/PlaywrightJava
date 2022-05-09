@@ -12,16 +12,8 @@ import utilities.retry;
 
 public class SearchTest extends base {
 
-    public Page page;
 
     private static final Logger LOGGER = LogManager.getLogger(SearchTest.class);
-
-    @BeforeTest
-    public void initializeDriver()
-    {
-        page = SetupDriver();
-    }
-
 
     @Test (description = "DuckDuckSearch" , retryAnalyzer= retry.class)
     @Parameters({"keywordToSearch"})
