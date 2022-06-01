@@ -2,11 +2,14 @@ package listeners.Allure;
 
 import com.microsoft.playwright.Page;
 import io.qameta.allure.Attachment;
+import lombok.SneakyThrows;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
-public class Allurelistener implements ITestListener {
+import java.util.Base64;
+
+public class Allurelistener implements ITestListener  {
     private static String getTestMethodName(ITestResult iTestResult) {
         return iTestResult.getMethod().getConstructorOrMethod().getName();
     }
@@ -14,8 +17,8 @@ public class Allurelistener implements ITestListener {
     //Text attachments for Allure
     @Attachment(value = "Page screenshot", type = "image/png")
     public byte[] saveScreenshotPNG(Page page) {
-
-        return (page.screenshot());
+        byte[] buffer = page.screenshot();
+        return  Base64.getEncoder().encode(buffer);
     }
 
     //Text attachments for Allure
@@ -42,8 +45,15 @@ public class Allurelistener implements ITestListener {
     public void onTestStart(ITestResult iTestResult) {
     }
 
+    @SneakyThrows
     @Override
     public void onTestSuccess(ITestResult iTestResult) {
+
+        Page page = null;
+        Object TestObject = iTestResult.getInstance();
+        Class CurrentClass = iTestResult.getTestClass().getRealClass();
+        page = (Page) CurrentClass.getDeclaredField("page").get(TestObject);
+        saveScreenshotPNG(page);
     }
 
     @Override
